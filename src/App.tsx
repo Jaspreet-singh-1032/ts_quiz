@@ -65,37 +65,37 @@ function App() {
   };
   return (
     <div className="App">
-      <h1>Quiz</h1>
-      {gameOver || number === TOTAL_QUESTIONS ? (
-        <button
-          className="app__startQuiz"
-          onClick={startTrivia}
-          disabled={loading}
-        >
-          Start
-        </button>
-      ) : null}
-      {loading && <p>Loading question...</p>}
-      <p className="app__score">Score: {score}</p>
-      {questions.length > 0 && (
-        <QuestionCard
-          questionNo={number + 1}
-          totalQuestions={TOTAL_QUESTIONS}
-          question={questions[number].question}
-          answers={questions[number].answers}
-          userAnswer={userAnswers[number]}
-          callback={checkAnswer}
-        />
-      )}
-      {userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
-        <button
-          className="app__nextQuestion"
-          onClick={nextQuestion}
-          disabled={number + 1 >= TOTAL_QUESTIONS}
-        >
-          Next Question
-        </button>
-      ) : null}
+      <div className="quiz">
+        {gameOver || number === TOTAL_QUESTIONS ? (
+          <>
+            <div className="quiz__heading">LetsQuiz</div>
+            <button className="btn" onClick={startTrivia} disabled={loading}>
+              Start
+            </button>
+          </>
+        ) : null}
+        {loading && <p>Loading question...</p>}
+        {!loading && !gameOver && <p className="quiz__score">Score: {score}</p>}
+        {questions.length > 0 && (
+          <QuestionCard
+            questionNo={number + 1}
+            totalQuestions={TOTAL_QUESTIONS}
+            question={questions[number].question}
+            answers={questions[number].answers}
+            userAnswer={userAnswers[number]}
+            callback={checkAnswer}
+          />
+        )}
+        {userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1 ? (
+          <button
+            className="btn btn--next"
+            onClick={nextQuestion}
+            disabled={number + 1 >= TOTAL_QUESTIONS}
+          >
+            Next Question
+          </button>
+        ) : null}
+      </div>
     </div>
   );
 }

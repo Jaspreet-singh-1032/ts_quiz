@@ -1,5 +1,6 @@
 import React from "react";
 import { AnswerObject } from "../App";
+import "./QuestionCard.css";
 interface Props {
   question: string;
   answers: string[];
@@ -21,12 +22,16 @@ const QuestionCard: React.FC<Props> = ({
       <p className="questionCard__number">
         Question: {questionNo} / {totalQuestions}
       </p>
-      <p dangerouslySetInnerHTML={{ __html: question }}></p>
-      <div>
+      <p
+        className="questionCard__question"
+        dangerouslySetInnerHTML={{ __html: question }}
+      ></p>
+      <div className="questionCard__options">
         {answers.map((item, index) => {
           return (
             <div key={index}>
               <button
+                className="btn"
                 disabled={userAnswer ? true : false}
                 onClick={callback}
                 value={index}
