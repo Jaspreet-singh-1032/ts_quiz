@@ -33,6 +33,7 @@ function App() {
     setNumber(0);
     setScore(0);
     setQuestions(newQuestions);
+    setUserAnswers([]);
     setLoading(false);
   };
   const checkAnswer = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -75,8 +76,10 @@ function App() {
           </>
         ) : null}
         {loading && <p>Loading question...</p>}
-        {!loading && !gameOver && <p className="quiz__score">Score: {score}</p>}
-        {questions.length > 0 && (
+        {number + 1 === TOTAL_QUESTIONS && gameOver && (
+          <p className="quiz__score">Your Score: {score}</p>
+        )}
+        {questions.length > 0 && !gameOver && (
           <QuestionCard
             questionNo={number + 1}
             totalQuestions={TOTAL_QUESTIONS}
